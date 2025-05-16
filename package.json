@@ -1,0 +1,19 @@
+{
+  "name": "hyper-sdk-examples",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Examples for using hyper-sdk to make p2p apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RangerMauve",
+  "license": "MIT",
+  "dependencies": {
+    "hyper-sdk": "^5.1.0",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  }
+}
