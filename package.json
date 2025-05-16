@@ -11,6 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "hyper-sdk": "^5.1.0",
+    "localdrive": "^2.2.0",
+    "mirror-drive": "^1.5.0",
     "qrcode-terminal": "^0.12.0"
   },
   "devDependencies": {
