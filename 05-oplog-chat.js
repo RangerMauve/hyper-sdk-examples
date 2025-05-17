@@ -33,13 +33,12 @@ if (givenURL) {
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
-});
+})
 
 rl.question('Enter something: ', (input) => {
-  console.log(`You entered: ${input}`);
-  rl.close();
-});
-
+  console.log(`You entered: ${input}`)
+  rl.close()
+})
 
 // Map URL to core instance
 const knownCores = new Map()
@@ -75,10 +74,11 @@ function sendKnown (peer) {
 }
 
 async function handleNew (core) {
+  if (knownCores.has(core.url)) return
   console.log('new peer', core.url)
   knownCores.set(core.url, core)
   for await (const block of core.createReadStream({ live: true })) {
-    rl.write(core.url.slice(8, 14) + ':' + block.toString('utf8') +'\n')
+    rl.write(core.url.slice(8, 14) + ':' + block.toString('utf8') + '\n')
   }
 }
 
