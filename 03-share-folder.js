@@ -34,7 +34,8 @@ const mirror = new MirrorDrive(src, dst)
 await mirror.done()
 console.log('uploaded')
 
-qrcode.generate(drive.url)
+qrcode.generate(drive.url
+)
 
 // Print when we're done mirroring
 // Generate a QR code of the URL
