@@ -50,8 +50,9 @@ const extension = gossipCore.registerExtension('gossip', {
 
 gossipCore.on('peer-add', broadcastKnown)
 
-function broadcastKnown (peer) {
-  console.log('peer-add', peer)
+broadcastKnown()
+
+function broadcastKnown () {
   const message = JSON.stringify([...knownCores.keys()])
   extension.broadcast(message)
 }
