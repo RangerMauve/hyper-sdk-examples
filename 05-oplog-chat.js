@@ -30,6 +30,17 @@ if (givenURL) {
   qrcode.generate(core.url)
 }
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('Enter something: ', (input) => {
+  console.log(`You entered: ${input}`);
+  rl.close();
+});
+
+
 // Map URL to core instance
 const knownCores = new Map()
 
@@ -67,14 +78,9 @@ async function handleNew (core) {
   console.log('new peer', core.url)
   knownCores.set(core.url, core)
   for await (const block of core.createReadStream({ live: true })) {
-    console.log(core.url.slice(7, 10), block.toString('utf8'))
+    rl.write(core.url.slice(8, 14) + ':' + block.toString('utf8') +'\n')
   }
 }
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
 
 while (true) {
   const message = await rl.question('>')
