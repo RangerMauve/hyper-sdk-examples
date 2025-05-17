@@ -1,5 +1,6 @@
 import { create } from 'hyper-sdk'
 import qrcode from 'qrcode-terminal'
+import readline from 'readline/promises'
 
 console.log('Loading')
 const sdk = await create({
@@ -68,4 +69,14 @@ async function handleNew (core) {
   for await (const block of core.createReadStream({ live: true })) {
     console.log(core.url.slice(7, 10), block.toString('utf8'))
   }
+}
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+while (true) {
+  const message = await rl.question('>')
+  await core.append(Buffer.from(message))
 }
