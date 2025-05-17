@@ -3,7 +3,7 @@ import qrcode from 'qrcode-terminal'
 
 console.log('Loading')
 const sdk = await create({
-  storage: false
+  storage: './storage'
 })
 
 process.on('SIGTERM', () => {
@@ -32,6 +32,8 @@ if (givenURL) {
 // Map URL to core instance
 const knownCores = new Map()
 
+knownCores.set(core.url, core)
+
 const extension = gossipCore.registerExtension('gossip', {
   encoding: 'utf-8',
   onmessage: (message, peer) => {
@@ -49,13 +51,13 @@ const extension = gossipCore.registerExtension('gossip', {
 gossipCore.on('peer-add', broadcastKnown)
 
 function broadcastKnown (peer) {
-console.log('peer-add', peer.publicKey.toString('utf8'))
-  const message = JSON.stringify([...knownCores.values()])
+  console.log('peer-add', peer)
+  const message = JSON.stringify([...knownCores.keys()])
   extension.broadcast(message)
 }
 
 function sendKnown (peer) {
-  const message = JSON.stringify([...knownCores.values()])
+  const message = JSON.stringify([...knownCores.keys()])
   extension.send(message, peer)
 }
 
