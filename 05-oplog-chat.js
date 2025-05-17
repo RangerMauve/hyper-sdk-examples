@@ -65,7 +65,7 @@ function sendKnown (peer) {
 async function handleNew (core) {
   console.log('new peer', core.url)
   knownCores.set(core.url, core)
-  for (const block of core.createReadStream({ live: true })) {
+  for await (const block of core.createReadStream({ live: true })) {
     console.log(core.url.slice(7, 10), block.toString('utf8'))
   }
 }
