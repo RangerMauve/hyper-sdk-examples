@@ -78,7 +78,7 @@ async function handleNew (core) {
   console.log('new peer', core.url)
   knownCores.set(core.url, core)
   for await (const block of core.createReadStream({ live: true })) {
-    rl.write(core.url.slice(8, 14) + ':' + block.toString('utf8') + '\n')
+    console.log(core.url.slice(8, 14) + ':', block.toString('utf8'))
   }
 }
 
